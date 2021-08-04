@@ -2,7 +2,7 @@ import { DataTypes } from 'sequelize';
 import db from '../db/connection';
 
 const Client = db.define('client', {
-  firt_name: {
+  first_name: {
     type: DataTypes.STRING
   },
   last_name: {

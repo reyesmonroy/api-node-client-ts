@@ -1,19 +1,43 @@
 import { Request, Response } from 'express';
+import Client from '../models/client';
 
-export const getClients = ( req: Request, res: Response ) => {
-    res.json({
-        msj: 'getClients'
-    });
+export const getClients = async ( req: Request, res: Response ) => {
+    
+    try{
+        const clients = await Client.findAll();
+        res.status(200).json({
+            data: clients,
+            code: 200
+        });
+    } catch (error) {
+        res.status(500).json({
+            error: 'No se pudo cargar los datos'
+        });
+        console.log(error);
+    }
 }
 
-export const getClient = ( req: Request, res: Response ) => {
+export const getClient = async ( req: Request, res: Response ) => {
 
     const { id } = req.params;
 
-    res.json({
-        msj: 'getClient',
-        id: id
-    });
+    try {
+        const client = await Client.findByPk(id);
+        if (client) {
+          return res.status(200).json({
+            data: client,
+            code: 200
+          });
+        } 
+        res.status(404).json({
+          error: `No se contro el recurso con el id ${id}`
+        });
+    } catch (error) {
+        res.status(500).json({
+          error: 'No se pudo cargar los datos'
+        });
+        console.log(error);
+    }
 }
 
 export const postClient = ( req: Request, res: Response ) => {
