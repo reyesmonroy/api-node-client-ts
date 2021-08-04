@@ -42,3 +42,8 @@ Con el comando `npm i express cors dotenv`.
 
 Con el comando `npm i --save-dev @types/express`.
 
+## Correr la aplicacion y ver los cambios realizador
+
+Comando en una ventana de terminal `nodemon dist/app.js`.
+Abrimos otra ventana de terminal y ejecutamos `tsc --watch`.
+
