@@ -34,3 +34,11 @@ Con el comando `./node_modules/.bin/tslint --init`.
 
 Dentro de rules `"no-console": false`.
 
+## Instalar Express, Cors y dotenv
+
+Con el comando `npm i express cors dotenv`.
+
+## Instalar types/express
+
+Con el comando `npm i --save-dev @types/express`.
+
