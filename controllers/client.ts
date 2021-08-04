@@ -40,34 +40,83 @@ export const getClient = async ( req: Request, res: Response ) => {
     }
 }
 
-export const postClient = ( req: Request, res: Response ) => {
+export const postClient = async ( req: Request, res: Response ) => {
 
     const { body } = req;
 
-    res.json({
-        msj: 'postClient',
-        body
-    });
+    try {
+        const existeEmail = await Client.findOne({
+            where: {
+                email: body.email
+            }
+        });
+        if (existeEmail) {
+            return res.status(400).json({
+                error: 'Ya existe un Cliente con el mismo email' + body.email
+            });
+        }
+
+        const client = await Client.create(body);
+        res.status(201).json({
+            data: client,
+            code: 201
+          });
+    } catch (error) {
+        res.status(500).json({
+            error: 'No se pudo crear el Cliente'
+        });
+        console.log(error);
+    }
 }
 
-export const putClient = ( req: Request, res: Response ) => {
+export const putClient = async ( req: Request, res: Response ) => {
 
     const { id } = req.params;
     const { body } = req;
+    try {
+        const client = await Client.findByPk(id);
+        if (!client) {
+        res.status(404).json({
+            error: `No existe un Cliente con el id ${id}`
+        });
+        }
 
-    res.json({
-        msj: 'putClient',
-        body,
-        id
-    });
+        await client?.update(body);
+        res.status(200).json({
+            data: client,
+            code: 200
+          });
+    } catch (error) {
+        res.status(500).json({
+            error: 'No se actualizaron los datos'
+        });
+        console.log(error);
+    }
 }
 
-export const deleteClient = ( req: Request, res: Response ) => {
+export const deleteClient = async ( req: Request, res: Response ) => {
 
     const { id } = req.params;
+    const { body } = req;
+    try {
+        const client = await Client.findByPk(id);
+        if (!client) {
+        res.status(404).json({
+            error: `No existe un Cliente con el id ${id}`
+        });
+        }
 
-    res.json({
-        msj: 'deleteClient',
-        id
-    });
+        await client?.update({
+            status: 'ANU'
+        });
+        res.status(200).json({
+            data: client,
+            code: 200
+          });
+    } catch (error) {
+        res.status(500).json({
+            error: 'No se eliminarion los datos'
+        });
+        console.log(error);
+    }
 }
