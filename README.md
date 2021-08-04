@@ -50,3 +50,13 @@ Abrimos otra ventana de terminal y ejecutamos `tsc --watch`.
 ## Instalar el typecors 
 
 Con el comando `npm i --save-dev @types/cors`.
+
+
+## Instalar sequelize
+
+Con el comando `npm install --save sequelize`.
+
+## Instlacion del paquete según la base de datos que trabajaremos
+
+con el comando `npm install --save mariadb`.
+
