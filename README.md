@@ -47,3 +47,6 @@ Con el comando `npm i --save-dev @types/express`.
 Comando en una ventana de terminal `nodemon dist/app.js`.
 Abrimos otra ventana de terminal y ejecutamos `tsc --watch`.
 
+## Instalar el typecors 
+
+Con el comando `npm i --save-dev @types/cors`.
