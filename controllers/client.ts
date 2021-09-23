@@ -4,7 +4,11 @@ import Client from '../models/client';
 export const getClients = async ( req: Request, res: Response ) => {
     
     try{
-        const clients = await Client.findAll();
+        const clients = await Client.findAll({
+            where: {
+              status: 'ACT'
+            }
+        });
         res.status(200).json({
             data: clients,
             code: 200
